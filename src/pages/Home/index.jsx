@@ -1,9 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import ModalFilter from '../components/Filter';
-import { SearchBox } from '../components/SearchBox';
-import InfinitHits from '../components/InfinitHits';
+import { SearchBox } from '../../components/SearchBox';
+import InfinitHits from '../../components/InfinitHits';
 import { useClearRefinements, useSearchBox } from 'react-instantsearch-hooks';
+import ModalFilter from '../../components/Filter';
 
 const Home = () => {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
