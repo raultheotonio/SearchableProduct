@@ -1,10 +1,30 @@
 import React from 'react';
-import {  useRefinementList } from 'react-instantsearch-hooks';
+import {  useBreadcrumb, useHierarchicalMenu, useRefinementList } from 'react-instantsearch-hooks';
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { BreadCrumb } from '../BreadCrumb';
+import { Hierarchical } from '../Hierarchical';
 
 const ModalFilter = ({isVisibleModal, setIsVisibleModal, clearFilter}) => {
 
-  const {items, refine, toggleShowMore} = useRefinementList({attribute: 'marca', showMore: true, limit: 2});
+  const { items, refine } = useRefinementList({attribute: 'marca'});
+
+  const { items: HierarItems, refine: HierarAction  } = useHierarchicalMenu({
+    attributes: [
+      'categories.lvl0',
+      'categories.lvl1',
+      'categories.lvl2',
+      ],
+    separator: ' > '
+  })
+
+  const { items: breadCrumbitem, refine: breadCrumbAction } = useBreadcrumb({
+    attributes: [
+      'categories.lvl0',
+      'categories.lvl1',
+      'categories.lvl2',
+      ],
+    separator: ' > '
+  })
 
   return (
     <Modal
@@ -20,7 +40,33 @@ const ModalFilter = ({isVisibleModal, setIsVisibleModal, clearFilter}) => {
               <Text style={styles.close}>x</Text>
             </TouchableOpacity>
           </View>
+          <View style={{
+            paddingVertical: 16,
+            paddingHorizontal: 16,
+
+          }}>
+            <Text style={{
+              fontSize: 16,
+              fontWeight: 'bold',
+            }}>BreadCrumb</Text>
+            <BreadCrumb breadCrumbitem={breadCrumbitem} breadCrumbAction={breadCrumbAction}/>
+          </View>
+          <View style={{
+            paddingVertical: 16,
+            paddingHorizontal: 16,
+
+          }}>
+            <Text style={{
+              fontSize: 16,
+              fontWeight: 'bold',
+            }}>HierarChical Menu</Text>
+            <Hierarchical items={HierarItems} refine={HierarAction}/>
+          </View>
           <View style={styles.content}>
+          <Text style={{
+              fontSize: 16,
+              fontWeight: 'bold',
+            }}>Refinement List</Text>
             {items.map((item)=> {
               return (<TouchableOpacity style={styles.contentFilter} key={item.label} onPress={()=>{
                  refine(item.value)
@@ -32,9 +78,6 @@ const ModalFilter = ({isVisibleModal, setIsVisibleModal, clearFilter}) => {
             })}
           </View>
           <View>
-            <TouchableOpacity onPress={()=> toggleShowMore()}>
-              <Text>mais</Text>
-            </TouchableOpacity>
           </View>
         </View>
       </Modal>

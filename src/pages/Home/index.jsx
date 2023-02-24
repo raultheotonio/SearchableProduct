@@ -10,8 +10,8 @@ const Home = () => {
   const {query, refine} = useSearchBox();
   const [inputValue, setInputValue] = useState(query);
 
-  const { canRefine: canClearFilter, refine: clearFilter } = useClearRefinements();
-
+  const { canRefine: canClearFilter, refine: refineFilter } = useClearRefinements();
+  
   const setText =(text) => {
     setInputValue(text);
     refine(text);
@@ -29,10 +29,8 @@ const Home = () => {
           <TouchableOpacity
             style={styles.btnClearFilter}
             onPress={() => {
-                if(canClearFilter) clearFilter()
-
+                if(canClearFilter) refineFilter('home')
                 setText('')
-              
               }}>
               <Text>Limpar filtro</Text>
           </TouchableOpacity>
@@ -42,7 +40,7 @@ const Home = () => {
         <ModalFilter
           isVisibleModal={isVisibleModal}
           setIsVisibleModal={setIsVisibleModal}
-          clearFilter={clearFilter}
+          clearFilter={refineFilter}
         />
     </View>
   )

@@ -1,5 +1,5 @@
 import React from 'react';
-import {useInfiniteHits, useRefinementList} from 'react-instantsearch-hooks';
+import {useInfiniteHits} from 'react-instantsearch-hooks';
 import {FlatList} from 'react-native';
 import Card from '../Card';
 
