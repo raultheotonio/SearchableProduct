@@ -14,14 +14,20 @@ const ModalFilter = ({isVisibleModal, setIsVisibleModal, clearFilter}) => {
       'categories.lvl1',
       'categories.lvl2',
       ],
-    separator: ' > '
+    separator: ' > ',
   })
-
   const { items: breadCrumbitem, refine: breadCrumbAction } = useBreadcrumb({
     attributes: [
       'categories.lvl0',
       'categories.lvl1',
       'categories.lvl2',
+      ],
+    separator: ' > '
+  })
+
+  const { items: HierarCategoryItems, refine: HierarCategoryAction  } = useHierarchicalMenu({
+    attributes: [
+      'categoryPageId'
       ],
     separator: ' > '
   })

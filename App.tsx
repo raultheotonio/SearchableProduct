@@ -9,16 +9,7 @@ const searchClient = algoliasearch('#', '#');
 function App(): JSX.Element {
   return (
     <SafeAreaView>
-      <InstantSearch
-        indexName="Product"
-        searchClient={searchClient}
-        initialUiState={{
-          Product: {
-            hierarchicalMenu: {
-              'categories.lvl0': ['home'],
-            },
-          },
-        }}>
+      <InstantSearch indexName="Product" searchClient={searchClient}>
         <Home />
       </InstantSearch>
     </SafeAreaView>

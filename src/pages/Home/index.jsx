@@ -12,6 +12,7 @@ const Home = () => {
 
   const { canRefine: canClearFilter, refine: refineFilter } = useClearRefinements();
   
+
   const setText =(text) => {
     setInputValue(text);
     refine(text);
